@@ -7,11 +7,15 @@ export default class Counter extends Component {
             count: this.props.counter.value
         }
         this.handleIncrement = this.handleIncrement.bind(this)
+        this.handleDelete = this.handleDelete.bind(this)
     }
 
     handleIncrement(){
         this.setState( state => ({ count: state.count+1 }) )
-        console.log(this.state.count)
+    }
+
+    handleDelete(id){
+        this.props.onDelete(id)
     }
 
     render() {
@@ -22,6 +26,7 @@ export default class Counter extends Component {
             <div className='d-flex mb-2'>
                 <span className={"badge " + (count<=0 ? "bg-warning" : "bg-primary") + " d-flex align-items-center me-2"}>{count === 0 ? "Zero" : count}</span>
                 <button className="btn btn-secondary" onClick={this.handleIncrement}>Increment</button>
+                <button className="btn btn-danger ms-2" onClick={ () => this.handleDelete(id) }>Delete</button>
             </div>
         )
     }
