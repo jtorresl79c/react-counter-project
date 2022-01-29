@@ -8,17 +8,23 @@ export default class Counters extends Component {
         this.state = {
             counters: [
                 {id: 1, value: 5},
-                {id: 2, value: 0},
-                {id: 3, value: 0},
-                {id: 4, value: 0},
-                {id: 5, value: 0},
+                {id: 2, value: 1},
+                {id: 3, value: 7},
+                {id: 4, value: 3},
+                {id: 5, value: 8},
             ]
         }
         this.handleDelete = this.handleDelete.bind(this)
+        this.updateContructors = this.updateContructors.bind(this)
     }
 
     handleDelete(id){
         let counters = this.state.counters.filter( counter => (counter.id !== id) )
+        this.setState({counters})
+    }
+
+    updateContructors(){
+        let counters = this.state.counters.map( counter => ({...counter, value: 0}))
         this.setState({counters})
     }
 
@@ -29,6 +35,7 @@ export default class Counters extends Component {
                 {
                     this.state.counters.map( counter => <Counter key={counter.id} counter={counter} onDelete={this.handleDelete}/> )
                 }
+                <button className="btn btn-primary" onClick={this.updateContructors}>Reset</button>
             </div>
         );
     }
